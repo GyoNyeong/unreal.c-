@@ -29,12 +29,16 @@ void AMyActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime); // 위치 가져오기-한번만, x 이동 1000까지 -> 반대로 이동 - 1000까지 반복
 	
+	
+
+
+
 	if (Switch==false)
 	{
 			Position.X+=10;
 			SetActorLocation(FVector(Position.X, Position.Y, Position.Z));
 		
-		 if (Position.X == Max)
+		 if (Position.X >= Max)
 		{
 			Switch = true;
 		}
@@ -45,7 +49,7 @@ void AMyActor::Tick(float DeltaTime)
 		Position.X += -10;
 		SetActorLocation(FVector(Position.X, Position.Y, Position.Z));
 		
-		if (Position.X == Min)
+		if (Position.X <= Min)
 		{
 			Switch = false;
 		}

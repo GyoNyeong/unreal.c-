@@ -21,6 +21,11 @@ AMyCppPawn::AMyCppPawn()
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	DefaultSceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("DefualtSceneComponent"));
+	DefaultSceneRoot->SetupAttachment(RootComponent);
+
+	RootComponent = DefaultSceneRoot;
+
 	OverlapColision = CreateDefaultSubobject<UBoxComponent>(TEXT("OverlapColision"));
 	OverlapColision->SetupAttachment(RootComponent);
 
@@ -29,7 +34,7 @@ AMyCppPawn::AMyCppPawn()
 	SpringArm->bUsePawnControlRotation = true;
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-	Camera->SetupAttachment(RootComponent);
+	Camera->SetupAttachment(SpringArm);
 	Camera->bUsePawnControlRotation = false;
 
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
@@ -37,8 +42,7 @@ AMyCppPawn::AMyCppPawn()
 
 	FloatingPawnMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("FloatingPawnMovement"));
 
-	DefaultSceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("DefualtSceneComponent"));
-	DefaultSceneRoot->SetupAttachment(RootComponent);
+
 	
 	jumpMultiplier = 100.0f;
 
@@ -68,6 +72,8 @@ void AMyCppPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 void AMyCppPawn::Jump()
 {
 	AddActorWorldOffset(GetActorUpVector() * jumpMultiplier);
+
+	
 }
 
 void AMyCppPawn::StopJumping()

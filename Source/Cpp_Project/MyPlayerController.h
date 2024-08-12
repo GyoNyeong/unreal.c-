@@ -9,6 +9,7 @@
 #include "InputMappingContext.h"
 #include "MyPlayerController.generated.h"
 
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE(FJumpDelegate);
 
 /**
  * 
@@ -23,7 +24,8 @@ class CPP_PROJECT_API AMyPlayerController : public APlayerController
 public:
 
 	AMyPlayerController();
-
+	
+	//FJumpDelegate jumpdelegate;
 
 	virtual void SetupInputComponent() override;
 	
@@ -45,10 +47,13 @@ public:
 	void Look(const FInputActionValue& Value);
 
 	void Move(const FInputActionValue& Value);
-
+	UFUNCTION()
 	void Interaction(const FInputActionValue& Value);
 
+	UFUNCTION()
 	void Jump();
 
+	UFUNCTION()
+	void stopjump();
 
 };

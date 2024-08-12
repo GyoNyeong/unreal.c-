@@ -14,4 +14,17 @@ class CPP_PROJECT_API AMyMyCppPawn : public AMyCppPawn
 {
 	GENERATED_BODY()
 	
+public:
+	virtual void BeginPlay() override;
+
+	virtual void Tick(float Deltatime) override;
+
+	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void AddGameScore();
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int gamescore;
+
 };

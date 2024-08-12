@@ -59,8 +59,10 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Default")
 	TObjectPtr<UBoxComponent> OverlapColision;
 
+	UFUNCTION()
 	void Jump();
 
+	UFUNCTION()
 	void StopJumping();
 
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
