@@ -60,10 +60,10 @@ public:
 	TObjectPtr<UBoxComponent> OverlapColision;
 
 	UFUNCTION()
-	void Jump();
+	virtual void Jump();
 
 	UFUNCTION()
-	void StopJumping();
+	virtual void StopJumping();
 
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 

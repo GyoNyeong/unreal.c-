@@ -13,7 +13,7 @@ void AMyPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 	//jumpdelegate.AddDynamic(this,&AMyPlayerController::Jump);
-	UE_LOG(LogTemp, Display, TEXT("SetCalled"));
+
 	if (UEnhancedInputComponent* InputCom = Cast<UEnhancedInputComponent>(InputComponent))
 	{
 		InputCom->BindAction(IA_Look, ETriggerEvent::Triggered, this, &AMyPlayerController::Look);
@@ -44,7 +44,7 @@ void AMyPlayerController::BeginPlay()
 
 void AMyPlayerController::Look(const FInputActionValue& Value)
 {
-	UE_LOG(LogTemp, Display, TEXT("LookCalled"));
+
 	FVector2D A = Value.Get<FVector2D>();
 	AddYawInput(A.X);
 	AddPitchInput(A.Y);
@@ -90,8 +90,8 @@ void AMyPlayerController::Interaction(const FInputActionValue& Value)
 void AMyPlayerController::Jump()
 {
 	//jumpdelegate.Broadcast();
-	GetPawn()->AddActorWorldOffset(FVector(0.0f, 0.0f, 500.0f), false);
-	
+	/*GetPawn()->AddActorWorldOffset(FVector(0.0f, 0.0f, 500.0f), false);*/
+	jumpdelegate.Broadcast();
 
 	//GetPawn()->AddActorWorldOffset(FVector(0.0f, 0.0f, -500.0f), false); StopJump
 	
@@ -99,5 +99,6 @@ void AMyPlayerController::Jump()
 
 void AMyPlayerController::stopjump()
 {
-	GetPawn()->AddActorWorldOffset(FVector(0.0f, 0.0f, -500.0f), false);
+	/*GetPawn()->AddActorWorldOffset(FVector(0.0f, 0.0f, -500.0f), false);*/
+	Sjumpdelegate.Broadcast();
 }

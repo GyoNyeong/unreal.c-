@@ -19,12 +19,22 @@ class CPP_PROJECT_API AMyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
-	
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FJumpDelegate);
+	//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTestDelegate, int, foo);
 
 public:
 
 	AMyPlayerController();
 	
+	UPROPERTY(BlueprintAssignable)
+	FJumpDelegate jumpdelegate;
+
+	UPROPERTY(BlueprintAssignable)
+	FJumpDelegate Sjumpdelegate;
+
+	//UPROPERTY(BlueprintAssignable)
+	//FTestDelegate TestDelegate;
+
 	//FJumpDelegate jumpdelegate;
 
 	virtual void SetupInputComponent() override;

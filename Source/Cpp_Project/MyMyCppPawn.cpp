@@ -9,6 +9,7 @@
 void AMyMyCppPawn::BeginPlay()
 {
 	Super::BeginPlay();
+	gamescore = 0;
 
 }
 
@@ -21,19 +22,50 @@ void AMyMyCppPawn::NotifyActorBeginOverlap(AActor* OtherActor)
 {
 	if (AMyActor* myActor = Cast<AMyActor>(OtherActor))
 	{
-		AddGameScore();
-		UE_LOG(LogTemp, Display, TEXT("OverlapEvent"));
+		//AddGameScore();
+		//AMyMyCppPawn :: AddGameScore();
+		//IMyInterface :: AddGameScore();
+		Execute_AddGameScore(this);
+		UE_LOG(LogTemp, Display, TEXT("%i"), gamescore);
+	
 	}
 
 	Super::NotifyActorBeginOverlap(OtherActor);
 }
 
 
-
-
 void AMyMyCppPawn::AddGameScore_Implementation()
 {
 	gamescore++;
-	UE_LOG(LogTemp, Display, TEXT("%i"), gamescore);
 }
+
+
+
+void AMyMyCppPawn::PossessedBy(AController* NewController)
+{
+	AMyPlayerController* myPlayerConteroller = Cast<AMyPlayerController>(NewController);
+	if (myPlayerConteroller)
+	{
+		myPlayerConteroller->jumpdelegate.AddDynamic(this, &AMyMyCppPawn::Jump);
+	
+		myPlayerConteroller->Sjumpdelegate.AddDynamic(this, &AMyMyCppPawn::StopJumping);
+		
+	}
+}
+
+
+void AMyMyCppPawn::UnPossessed()
+{
+	AMyPlayerController* myPlayerConteroller = Cast<AMyPlayerController>(GetController());
+	if (myPlayerConteroller)
+	{
+		myPlayerConteroller->jumpdelegate.Clear();
+		myPlayerConteroller->Sjumpdelegate.Clear();
+		
+	}
+}
+
+
+
+
 
